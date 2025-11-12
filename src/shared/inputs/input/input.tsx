@@ -1,6 +1,5 @@
-import {Input as InputAntd, InputProps as InputPropsAntd} from 'antd';
+import {Input as InputAntd, type InputProps as InputPropsAntd} from 'antd';
 import { BoxInput, TitleInput } from './input.styles';
-import type { InputHTMLAttributes } from 'react';
 
 
 interface InputProps extends InputPropsAntd{
