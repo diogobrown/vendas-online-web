@@ -1,3 +1,5 @@
+
+import Input from "../../../shared/inputs/input/input";
 import { BackgroundImage, ContainerLoginScreen, ContainerLogin, LimitedContainer, LogImage } from "../styles/loginScreen.styles";
 
 const LoginScreen = () => {
@@ -6,6 +8,8 @@ const LoginScreen = () => {
         <ContainerLogin>
             <LimitedContainer>
                 <LogImage src ="./logo.png"/>
+                <Input title='Usuário'/>
+                <Input title='Senha'/>
             </LimitedContainer>
         </ContainerLogin>
          <BackgroundImage src="./background.png"/>   
