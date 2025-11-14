@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "../../../shared/buttons/button/Button";
 import Input from "../../../shared/inputs/input/input";
-import { BackgroundImage, ContainerLoginScreen, ContainerLogin, LimitedContainer, LogImage, TitleLogin } from "../styles/loginScreen.styles";
-import SVGHome from "../../../shared/icons/SVGLogo.tsx";
+import { BackgroundImage, ContainerLoginScreen, ContainerLogin, LimitedContainer, TitleLogin } from "../styles/loginScreen.styles";
 import SVGLogo from "../../../shared/icons/SVGLogo.tsx";
 
 
