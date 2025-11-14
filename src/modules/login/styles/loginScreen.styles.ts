@@ -14,12 +14,6 @@ export const BackgroundImage = styled.img`
     
 `;
 
-export const LogImage = styled.img`
-  width: 202px;
-  height: 143px;
-    
-`;
-
 export const TitleLogin = styled(Title)`
     color: #006397;
 `;

@@ -3,6 +3,8 @@ import axios from "axios";
 import Button from "../../../shared/buttons/button/Button";
 import Input from "../../../shared/inputs/input/input";
 import { BackgroundImage, ContainerLoginScreen, ContainerLogin, LimitedContainer, LogImage, TitleLogin } from "../styles/loginScreen.styles";
+import SVGHome from "../../../shared/icons/SVGLogo.tsx";
+import SVGLogo from "../../../shared/icons/SVGLogo.tsx";
 
 
 const LoginScreen = () => {
@@ -41,7 +43,8 @@ const LoginScreen = () => {
     <ContainerLoginScreen>
         <ContainerLogin>
             <LimitedContainer>
-                <LogImage src ="./logo.png"/>
+                
+                <SVGLogo width="202px" height="143px"  />
                 <TitleLogin level={2} type="secondary" >Login</TitleLogin>
                 <Input title='Usuário' margin="32px 0px 0px" onChange={handleEmail} value={email}/>
                 <Input type="password" title='Senha' margin="32px 0px 0px" onChange={handlePassword} value={password}/>
