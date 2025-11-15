@@ -10,10 +10,10 @@ import Input from '../../../shared/components/inputs/input/input.tsx';
 import Button from '../../../shared/components/buttons/button/Button.tsx';
 import SVGLogo from '../../../shared/components/icons/SVGLogo.tsx';
 import { useRequests } from '../../../shared/hooks/useRequests.ts';
-import { useGlobalCotext } from '../../../shared/hooks/usueGlobalContext.tsx';
+import { useGlobalContext } from '../../../shared/hooks/useGlobalContext.tsx';
 
 const LoginScreen = () => {
-  const { acessToken, setAcessToken } = useGlobalCotext();
+  const { acessToken, setAcessToken } = useGlobalContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { postRequest, loading } = useRequests();
