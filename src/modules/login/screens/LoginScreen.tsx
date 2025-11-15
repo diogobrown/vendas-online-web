@@ -10,8 +10,10 @@ import Input from '../../../shared/components/inputs/input/input.tsx';
 import Button from '../../../shared/components/buttons/button/Button.tsx';
 import SVGLogo from '../../../shared/components/icons/SVGLogo.tsx';
 import { useRequests } from '../../../shared/hooks/useRequests.ts';
+import { useGlobalCotext } from '../../../shared/hooks/usueGlobalContext.tsx';
 
 const LoginScreen = () => {
+  const { acessToken, setAcessToken } = useGlobalCotext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { postRequest, loading } = useRequests();
@@ -25,6 +27,7 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
+    setAcessToken('nova token');
     postRequest('http://localhost:8080/auth', {
       email: email,
       password: password,
@@ -37,7 +40,7 @@ const LoginScreen = () => {
         <LimitedContainer>
           <SVGLogo width="202px" height="143px" />
           <TitleLogin level={2} type="secondary">
-            Login
+            Login ({acessToken})
           </TitleLogin>
           <Input title="Usuário" margin="32px 0px 0px" onChange={handleEmail} value={email} />
           <Input

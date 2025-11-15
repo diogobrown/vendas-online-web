@@ -1,8 +1,9 @@
 import './main.css';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, type RouteObject } from 'react-router-dom';
 import { loginRoutes } from './modules/login/routes';
+import React from 'react';
+import { GlobalProvider } from './shared/hooks/usueGlobalContext';
 
 export const mainRoutes: RouteObject[] = [
   {
@@ -15,7 +16,9 @@ export const mainRoutes: RouteObject[] = [
 const router = createBrowserRouter([...loginRoutes, ...mainRoutes]);
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  <React.StrictMode>
+    <GlobalProvider>
+      <RouterProvider router={router} />
+    </GlobalProvider>
+  </React.StrictMode>,
 );
