@@ -18,11 +18,11 @@ interface GlobaContextProps {
   setGlobalData: (globalData: GlobalData) => void;
 }
 
-const GlobalContext = createContext({} as GlobaContextProps);
-
 interface GlobalProviderProps {
   children: React.ReactNode;
 }
+
+const GlobalContext = createContext({} as GlobaContextProps);
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalData, setGlobalData] = useState<GlobalData>({});
