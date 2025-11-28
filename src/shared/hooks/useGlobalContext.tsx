@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+import { getAuthorizationToken, setAuthorizationToken } from '../functions/connection/auth';
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
@@ -13,19 +15,20 @@ interface GlobalData {
   notification?: NotificationProps;
 }
 
-interface GlobaContextProps {
+interface GlobalContextProps {
   globalData: GlobalData;
   setGlobalData: (globalData: GlobalData) => void;
 }
+
+const GlobalContext = createContext({} as GlobalContextProps);
 
 interface GlobalProviderProps {
   children: React.ReactNode;
 }
 
-const GlobalContext = createContext({} as GlobaContextProps);
-
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [globalData, setGlobalData] = useState<GlobalData>({});
+
   return (
     <GlobalContext.Provider value={{ globalData, setGlobalData }}>
       {children}
@@ -36,7 +39,15 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 export const useGlobalContext = () => {
   const { globalData, setGlobalData } = useContext(GlobalContext);
 
-  const setAcessToken = (accessToken: string) => {
+  useEffect(() => {
+    const token = getAuthorizationToken();
+    if (token) {
+      setAccessToken(token);
+    }
+  }, []);
+
+  const setAccessToken = (accessToken: string) => {
+    setAuthorizationToken(accessToken);
     setGlobalData({
       ...globalData,
       accessToken,
@@ -55,9 +66,9 @@ export const useGlobalContext = () => {
   };
 
   return {
-    notification: globalData.notification,
-    acessToken: globalData?.accessToken,
-    setAcessToken,
+    notification: globalData?.notification,
+    accessToken: globalData?.accessToken,
+    setAccessToken,
     setNotification,
   };
 };

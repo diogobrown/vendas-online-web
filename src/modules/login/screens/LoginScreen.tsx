@@ -1,19 +1,21 @@
 import { useState } from 'react';
+
+import { useGlobalContext } from '../../../shared/hooks/useGlobalContext';
+import { useRequests } from '../../../shared/hooks/useRequests';
 import {
   BackgroundImage,
-  ContainerLoginScreen,
   ContainerLogin,
+  ContainerLoginScreen,
   LimitedContainer,
   TitleLogin,
 } from '../styles/loginScreen.styles';
-import Input from '../../../shared/components/inputs/input/input.tsx';
-import Button from '../../../shared/components/buttons/button/Button.tsx';
-import SVGLogo from '../../../shared/components/icons/SVGLogo.tsx';
-import { useRequests } from '../../../shared/hooks/useRequests.ts';
-import { useGlobalContext } from '../../../shared/hooks/useGlobalContext.tsx';
+import type { UserType } from '../../types/UserType';
+import Input from '../../../shared/components/inputs/input/input';
+import SVGLogo from '../../../shared/components/icons/SVGLogo';
+import Button from '../../../shared/components/buttons/button/Button';
 
 const LoginScreen = () => {
-  const { acessToken, setAcessToken } = useGlobalContext();
+  const { accessToken, setAccessToken } = useGlobalContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { postRequest, loading } = useRequests();
@@ -26,32 +28,33 @@ const LoginScreen = () => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = () => {
-    setAcessToken('nova token');
-    postRequest('http://localhost:8080/auth', {
+  const handleLogin = async () => {
+    const user = await postRequest<UserType>('http://localhost:8080/auth', {
       email: email,
       password: password,
     });
+
+    setAccessToken(user?.accessToken || '');
   };
 
   return (
     <ContainerLoginScreen>
       <ContainerLogin>
         <LimitedContainer>
-          <SVGLogo width="202px" height="143px" />
+          <SVGLogo />
           <TitleLogin level={2} type="secondary">
-            Login ({acessToken})
+            LOGIN ({accessToken})
           </TitleLogin>
-          <Input title="Usuário" margin="32px 0px 0px" onChange={handleEmail} value={email} />
+          <Input title="USUÁRIO" margin="32px 0px 0px" onChange={handleEmail} value={email} />
           <Input
             type="password"
-            title="Senha"
+            title="SENHA"
             margin="32px 0px 0px"
             onChange={handlePassword}
             value={password}
           />
           <Button loading={loading} type="primary" margin="64px 0px 16px 0px" onClick={handleLogin}>
-            Entrar
+            ENTRAR
           </Button>
         </LimitedContainer>
       </ContainerLogin>
